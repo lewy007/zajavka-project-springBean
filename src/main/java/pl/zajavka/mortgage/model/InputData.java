@@ -1,5 +1,6 @@
 package pl.zajavka.mortgage.model;
 
+import lombok.Builder;
 import lombok.With;
 
 import java.math.BigDecimal;
@@ -23,6 +24,10 @@ public record InputData(
     boolean mortgagePrintPayoffsSchedule,
     Integer mortgageRateNumberToPrint
 ) {
+
+    @Builder
+    public InputData {
+    }
 
     private static final BigDecimal PERCENT = new BigDecimal("100");
 

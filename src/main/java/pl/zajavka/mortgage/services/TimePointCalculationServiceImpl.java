@@ -1,5 +1,6 @@
 package pl.zajavka.mortgage.services;
 
+import org.springframework.stereotype.Service;
 import pl.zajavka.mortgage.model.InputData;
 import pl.zajavka.mortgage.model.Rate;
 import pl.zajavka.mortgage.model.TimePoint;
@@ -9,6 +10,7 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+@Service
 public class TimePointCalculationServiceImpl implements TimePointCalculationService {
 
     public TimePoint calculate(final BigDecimal rateNumber, final InputData inputData) {

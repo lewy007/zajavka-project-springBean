@@ -1,5 +1,7 @@
 package pl.zajavka.mortgage.services;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import pl.zajavka.mortgage.model.InputData;
 import pl.zajavka.mortgage.model.Overpayment;
 import pl.zajavka.mortgage.model.Rate;
@@ -17,6 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Service
+@Slf4j
 public class PrintingServiceImpl implements PrintingService {
 
     private static final String SEPARATOR = createSeparator('-', 180);
@@ -110,7 +114,7 @@ public class PrintingServiceImpl implements PrintingService {
             }
             Files.writeString(RESULT_FILE_PATH, message, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
         } catch (IOException e) {
-            System.err.println("Error writing data to file: " + e.getMessage());
+            log.error("Error writing data to file: " + e.getMessage());
         }
     }
 

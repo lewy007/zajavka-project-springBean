@@ -1,5 +1,6 @@
 package pl.zajavka.mortgage.services;
 
+import org.springframework.stereotype.Service;
 import pl.zajavka.mortgage.model.InputData;
 import pl.zajavka.mortgage.model.Overpayment;
 
@@ -7,6 +8,7 @@ import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Optional;
 
+@Service
 public class OverpaymentCalculationServiceImpl implements OverpaymentCalculationService {
 
     @Override

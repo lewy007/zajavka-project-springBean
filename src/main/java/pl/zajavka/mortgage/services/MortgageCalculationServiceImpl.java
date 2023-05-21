@@ -1,12 +1,13 @@
 package pl.zajavka.mortgage.services;
 
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 import pl.zajavka.mortgage.model.InputData;
 import pl.zajavka.mortgage.model.Rate;
-import pl.zajavka.mortgage.model.Summary;
 
 import java.util.List;
 
+@Service
 @AllArgsConstructor
 public class MortgageCalculationServiceImpl implements MortgageCalculationService {
 

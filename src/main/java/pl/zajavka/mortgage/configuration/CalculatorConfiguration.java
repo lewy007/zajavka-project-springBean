@@ -1,14 +1,23 @@
-package pl.zajavka.mortgage.services;
+package pl.zajavka.mortgage.configuration;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import pl.zajavka.mortgage.MortgageCalculator;
 import pl.zajavka.mortgage.model.Rate;
 import pl.zajavka.mortgage.model.RateAmounts;
 import pl.zajavka.mortgage.model.Summary;
+import pl.zajavka.mortgage.services.SummaryService;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.function.Function;
 
-public class SummaryServiceFactory {
+@Configuration
+@ComponentScan(basePackageClasses = MortgageCalculator.class)
+public class CalculatorConfiguration {
 
+    @Bean
     public static SummaryService create() {
         return rates -> {
             BigDecimal interestSum = calculate(rates, rate -> rate.rateAmounts().interestAmount());
@@ -23,9 +32,8 @@ public class SummaryServiceFactory {
         return rateAmounts.capitalAmount().add(rateAmounts.overpayment().amount());
     }
 
-    private static BigDecimal calculate(final List<Rate> rates, Function function) {
+    private static BigDecimal calculate(final List<Rate> rates, Function<Rate, BigDecimal> function) {
         return rates.stream()
-            .reduce(BigDecimal.ZERO, (sum, next) -> sum.add(function.calculate(next)), BigDecimal::add);
+                .reduce(BigDecimal.ZERO, (sum, next) -> sum.add(function.apply(next)), BigDecimal::add);
     }
-
 }
